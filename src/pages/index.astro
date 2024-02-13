@@ -1,16 +1,18 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Servicio de Salud Sagrada Familia">
+	<main>	
+		<section class="flex flex-col items-center justify-center h-screen">
+			<h1>Pacientes Sagrada Familia DB</h1>
+			<p>Esta es una aplicación web para la gestión de pacientes de la Sagrada Familia DB.</p>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		text-align: center;
+	}
+</style>
