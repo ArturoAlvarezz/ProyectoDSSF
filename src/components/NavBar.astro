@@ -1,9 +1,20 @@
 ---
-	let isDark = false;
+let isDark = false;
+let session = false;
 
 const isDarkMode = () => {
     isDark = !isDark;
 };
+
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken && refreshToken) {
+    session = true;
+}
+
 ---
 
 <header>
@@ -12,13 +23,15 @@ const isDarkMode = () => {
 >
     <div class="flex justify-between p-4">
         <div class="text-[2rem] leading-[3rem] tracking-tight font-bold text-black dark:text-white">
-            Servicio de Salud Sagrada Familia
+            Departamento de Salud Sagrada Familia
         </div>
-        <div class="flex items-center space-x-4 text-lg font-semibold tracking-tight">
-            <a href="/src/pages/signin.astro" class="hover:bg-gray-100 hover:text-black font-bold py-2 px-4 rounded text-black dark:text-white">
-                Iniciar sesión
-            </a>
-        </div>
+        <form action="/api/auth/signout">
+            {session && <button
+                type="submit"
+                class="px-4 py-2 text-white bg-slate-500 dark:bg-slate-500 dark:text-white rounded-md"
+            >
+                Cerrar Sesión
+            </button> } 
     </div>
 </nav>
 

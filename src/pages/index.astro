@@ -1,18 +1,27 @@
 ---
+import SignIn from '../components/SignIn.astro';
 import Layout from '../layouts/Layout.astro';
+
+let session = false;
+const { cookies } = Astro;
+
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (accessToken && refreshToken) {
+    session = true;
+}
 ---
 
 <Layout title="Servicio de Salud Sagrada Familia">
-	<main>	
-		<section class="flex flex-col items-center justify-center h-screen">
-			<h1>Pacientes Sagrada Familia DB</h1>
-			<p>Esta es una aplicación web para la gestión de pacientes de la Sagrada Familia DB.</p>
+	<main>
+		<section class="flex flex-col justify-center h-screen">
+			{session ? (
+				<div class="text-center">
+					<h1 class="text-3xl font-bold">¡Bienvenido!</h1>
+					<p class="text-lg">Ya has iniciado sesión</p>
+				</div>
+			) : <SignIn /> }
 		</section>
 	</main>
 </Layout>
-
-<style>
-	main {
-		text-align: center;
-	}
-</style>
