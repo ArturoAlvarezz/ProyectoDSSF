@@ -1,0 +1,49 @@
+---
+import { supabase } from "../lib/supabase";
+
+
+interface GrupoFamiliar {
+  jefe_del_hogar: string;
+  domicilio: string;
+}
+
+
+let { data: gruposFamiliares, error } = await supabase
+  .from('gruposFamiliares')
+  .select('jefe_del_hogar, domicilio')
+
+
+gruposFamiliares = gruposFamiliares as GrupoFamiliar[]
+
+console.log(gruposFamiliares)
+
+if (error) {
+  console.log(error)
+}
+---
+
+<div class="search">
+  <label for="search">Search:</label>
+  <input type="text" id="search" name="search" placeholder="Search for a product">
+</div>
+<div>
+  {gruposFamiliares.map((grupoFamiliar) => (
+    <div class="card">
+      <h2>{grupoFamiliar.jefe_del_hogar}</h2>
+      <p>{grupoFamiliar.domicilio}</p>
+    </div>
+  ))}
+
+</div>
+
+<style>
+  .search {
+    margin-bottom: 20px;
+  }
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+</style>

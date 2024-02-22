@@ -1,6 +1,9 @@
 ---
+import NavBar from '../components/NavBar.astro';
 import SignIn from '../components/SignIn.astro';
+import UserRegister from '../components/UserRegister.astro';
 import Layout from '../layouts/Layout.astro';
+import Busqueda from '../components/Busqueda.astro';
 
 let session = false;
 const { cookies } = Astro;
@@ -15,13 +18,11 @@ if (accessToken && refreshToken) {
 
 <Layout title="Servicio de Salud Sagrada Familia">
 	<main>
-		<section class="flex flex-col justify-center h-screen">
+		<section class="mt-20">
 			{session ? (
-				<div class="text-center">
-					<h1 class="text-3xl font-bold">¡Bienvenido!</h1>
-					<p class="text-lg">Ya has iniciado sesión</p>
-				</div>
+				<UserRegister />
 			) : <SignIn /> }
+			<Busqueda />
 		</section>
 	</main>
 </Layout>
